@@ -4,8 +4,8 @@ services:
 
   wppconnect-server:
     build: 
-      context: ./wppconnect-server
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: SERVER.Dockerfile
     restart: always
     image: wppconnect-server
     container_name: wppconnect-server
@@ -19,8 +19,8 @@ services:
   
   wppconnect-front:
     build: 
-      context: ./wppconnect-front
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: FRONT.Dockerfile
     image: wppconnect-front
     container_name: wppconnect-front
     hostname: wppconnect-front
@@ -33,8 +33,8 @@ services:
 
   wppconnect-nginx:
     build: 
-      context: ./wppconnect-nginx
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: NGINX.Dockerfile
     container_name: wppconnect-nginx
     entrypoint: nginx -g "daemon off;"
     ports:
