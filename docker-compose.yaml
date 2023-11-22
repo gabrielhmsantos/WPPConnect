@@ -4,8 +4,8 @@ services:
 
   wppconnect-server:
     build: 
-      context: ./
-      dockerfile: SERVER.Dockerfile
+      context: ./wppconnect-server
+      dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
     container_name: wppconnect-server
@@ -14,13 +14,13 @@ services:
     networks: 
       - WPPCONNECT-NETWORK
     volumes:
-      - WPPCONNECT-SESSION:/home/node/app/tokens
+      - ./sessions:/home/node/app/tokens
     tty: true
   
   wppconnect-front:
     build: 
-      context: ./
-      dockerfile: FRONT.Dockerfile
+      context: ./wppconnect-front
+      dockerfile: Dockerfile
     image: wppconnect-front
     container_name: wppconnect-front
     hostname: wppconnect-front
@@ -33,8 +33,8 @@ services:
 
   wppconnect-nginx:
     build: 
-      context: ./
-      dockerfile: NGINX.Dockerfile
+      context: ./wppconnect-nginx
+      dockerfile: Dockerfile
     container_name: wppconnect-nginx
     entrypoint: nginx -g "daemon off;"
     ports:
@@ -44,9 +44,6 @@ services:
       - WPPCONNECT-NETWORK
     depends_on:
       - wppconnect-front
-
-volumes:
-  WPPCONNECT-SESSION:
 
 networks: 
   WPPCONNECT-NETWORK:
