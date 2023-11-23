@@ -1,16 +1,16 @@
 FROM node:lts-alpine3.18 as builder
 
-
+ENV PORT=21465
 
 RUN apk add wget && \
     apk add --no-cache git
 
 WORKDIR /home/node
-RUN git clone https://github.com/wppconnect-team/wppconnect-server.git /home/node/app 
+RUN git clone https://github.com/wppconnect-team/wppconnect-server.git /home/node/app
 
 WORKDIR /home/node/app
 
-COPY ./config.ts /home/node/app/src
+COPY ./config.json /home/node/app/src
 
 RUN yarn install
 
