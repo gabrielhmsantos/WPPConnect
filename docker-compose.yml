@@ -3,7 +3,7 @@ version: '3'
 services: 
 
   wppconnect-server:
-    build:
+    build: 
       context: ./wppconnect-server
       dockerfile: Dockerfile
     restart: always
@@ -11,14 +11,14 @@ services:
     container_name: wppconnect-server
     hostname: wppconnect-server
     entrypoint: docker-entrypoint.sh yarn dev
-    networks:
+    networks: 
       - wpp-network
     tty: true
     volumes:
       - ./sessions:/home/node/app/tokens/
 
   wppconnect-nginx:
-    build:
+    build: 
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
     restart: always
@@ -26,7 +26,7 @@ services:
     entrypoint: nginx -g "daemon off;"
     ports:
       - "21465:21465"
-    networks:
+    networks: 
       - wpp-network
     depends_on:
       - wppconnect-server
