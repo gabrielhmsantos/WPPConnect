@@ -2,17 +2,17 @@ version: '3'
 
 services: 
 
-  WPPC-SERVER-1:
+  wppc-server-1:
     build: 
       context: ./wppconnect-server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
-    container_name: WPPC-SERVER-1
-    hostname: WPPC-SERVER-1
+    container_name: wppc-server-1
+    hostname: wppc-server-1
     entrypoint: docker-entrypoint.sh yarn dev
     networks: 
-      WPPC-NETWORK:
+      wppc-network:
         ipv4_address: 172.20.0.2
     tty: true
     deploy:
@@ -22,19 +22,19 @@ services:
         reservations:
           memory: 200M
     depends_on:
-      - WPPC-REDIS
+      - wppc-redis
     
-  WPPC-SERVER-2:
+  wppc-server-2:
     build: 
       context: ./wppconnect-server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
-    container_name: WPPC-SERVER-2
-    hostname: WPPC-SERVER-2
+    container_name: wppc-server-2
+    hostname: wppc-server-2
     entrypoint: docker-entrypoint.sh yarn dev
     networks: 
-      WPPC-NETWORK:
+      wppc-network:
         ipv4_address: 172.20.0.3
     tty: true
     deploy:
@@ -44,33 +44,33 @@ services:
         reservations:
           memory: 200M
     depends_on:
-      - WPPC-SERVER-1
-      - WPPC-REDIS
+      - wppc-server-1
+      - wppc-redis
 
-  WPPC-REDIS:
+  wppc-redis:
     restart: always
     image: redis
-    container_name: WPPC-REDIS
-    hostname: WPPC-REDIS
+    container_name: wppc-redis
+    hostname: wppc-redis
     ports:
       - "6379:6379"
     networks: 
-      WPPC-NETWORK:
+      wppc-network:
         ipv4_address: 172.20.0.7
     volumes:
       - ./redis-data:/data
   
-  WPPC-NGINX:
+  wppc-nginx:
     build: 
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
-    container_name: WPPC-NGINX
-    hostname: WPPC-NGINX
+    container_name: wppc-nginx
+    hostname: wppc-nginx
     entrypoint: nginx -g "daemon off;"
     ports:
       - "8081:8081"
     networks: 
-      WPPC-NETWORK:
+      wppc-network:
         ipv4_address: 172.20.0.8
     volumes: 
       - ./wppconnect-nginx/conf.d:/etc/nginx/conf.d
@@ -81,13 +81,13 @@ services:
         reservations:
           memory: 200M
     depends_on:
-      - WPPC-SERVER-1
-      - WPPC-SERVER-2
-      - WPPC-REDIS
+      - wppc-server-1
+      - wppc-server-2
+      - wppc-redis
 
 networks: 
-  WPPC-NETWORK:
-    name: WPPC-NETWORK
+  wppc-network:
+    name: wppc-network
     driver: bridge 
     ipam:
       driver: default
