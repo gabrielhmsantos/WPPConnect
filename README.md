@@ -4,14 +4,17 @@ Build revisada e configurada do WPPConnect para uso da Tecnocomp Tecnologia e Se
 
 ## Estrutura
 
-- Serviços
-    - WPPC-FRONT
-        - Interface WEB da aplicação
+### Serviços
 
-    - WPPC-SERVER
-        - Serviço principal da aplicação
+- WPPC-FRONT
+  - Interface WEB da aplicação
 
-    - WPPC-NGINX
-        - Proxy de Serviço da aplicação
-- Redes
-    - WPPC-NETWORK (Bridge)
+- WPPC-SERVER
+  - Serviço principal da aplicação
+
+- WPPC-NGINX
+  - Proxy de Serviço da aplicação
+
+### Redes
+
+- WPPC-NETWORK (Bridge)
