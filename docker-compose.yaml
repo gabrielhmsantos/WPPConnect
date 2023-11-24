@@ -2,94 +2,49 @@ version: '3'
 
 services: 
 
-  wppc-server-1:
+  wppc-server:
     build: 
       context: ./wppconnect-server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
-    container_name: wppc-server-1
-    hostname: wppc-server-1
+    container_name: WPPC-SERVER
+    hostname: WPPC-SERVER
     entrypoint: docker-entrypoint.sh yarn dev
     networks: 
-      wppc-network:
-        ipv4_address: 172.20.0.2
+      - wppc-network
     tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppc-redis
-    
-  wppc-server-2:
-    build: 
-      context: ./wppconnect-server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppc-server-2
-    hostname: wppc-server-2
-    entrypoint: docker-entrypoint.sh yarn dev
-    networks: 
-      wppc-network:
-        ipv4_address: 172.20.0.3
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppc-server-1
-      - wppc-redis
-
-  wppc-redis:
-    restart: always
-    image: redis
-    container_name: wppc-redis
-    hostname: wppc-redis
-    ports:
-      - "6379:6379"
-    networks: 
-      wppc-network:
-        ipv4_address: 172.20.0.7
-    volumes:
-      - ./redis-data:/data
   
+  wppc-front:
+    build: 
+      context: ./wppconnect-front
+      dockerfile: Dockerfile
+    image: wppconnect-front
+    container_name: WPPC-FRONT
+    hostname: WPPC-FRONT
+    entrypoint: docker-entrypoint.sh yarn start
+    networks: 
+      - wppc-network
+    tty: true
+    depends_on:
+      - wppconnect-server
+
   wppc-nginx:
     build: 
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
-    container_name: wppc-nginx
-    hostname: wppc-nginx
+    container_name: WPPC-NGINX
+    hostname: WPPC-NGINX
     entrypoint: nginx -g "daemon off;"
     ports:
+      - "8080:8080"
       - "8081:8081"
     networks: 
-      wppc-network:
-        ipv4_address: 172.20.0.8
-    volumes: 
-      - ./wppconnect-nginx/conf.d:/etc/nginx/conf.d
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
+      - wppc-network
     depends_on:
-      - wppc-server-1
-      - wppc-server-2
-      - wppc-redis
+      - wppconnect-front
 
 networks: 
   wppc-network:
     name: wppc-network
     driver: bridge 
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.20.0.0/16

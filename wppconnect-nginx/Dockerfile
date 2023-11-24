@@ -1,6 +1,4 @@
-FROM openresty/openresty:1.19.9.1-0-buster-fat
+FROM nginx:1.15.0-alpine
 
-RUN rm /etc/nginx/conf.d/default.conf && \ 
-    rm /etc/openresty/nginx.conf
-
-COPY ./nginx.conf /etc/openresty
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
