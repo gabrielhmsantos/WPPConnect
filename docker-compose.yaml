@@ -13,6 +13,8 @@ services:
     entrypoint: docker-entrypoint.sh yarn dev
     networks: 
       - wppc-network
+    volumes:
+      - ./sessions:/home/node/app/tokens/    
     tty: true
   
   wppc-front:
