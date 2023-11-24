@@ -29,7 +29,7 @@ services:
       - wppc-network
     tty: true
     depends_on:
-      - wppconnect-server
+      - wppc-server
 
   wppc-nginx:
     build: 
@@ -44,7 +44,7 @@ services:
     networks: 
       - wppc-network
     depends_on:
-      - wppconnect-front
+      - wppc-front
 
 networks: 
   wppc-network:
