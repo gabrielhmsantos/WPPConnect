@@ -60,12 +60,12 @@ services:
     volumes:
       - ./redis-data:/data
   
-  wppconnect-nginx:
+  WPPC-NGINX:
     build: 
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
-    container_name: wppconnect-nginx
-    hostname: wppconnect-nginx
+    container_name: WPPC-NGINX
+    hostname: WPPC-NGINX
     entrypoint: nginx -g "daemon off;"
     ports:
       - "8081:8081"
