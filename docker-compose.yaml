@@ -39,8 +39,8 @@ services:
     hostname: WPPC-NGINX
     entrypoint: nginx -g "daemon off;"
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "9080:8080"
+      - "9081:8081"
     networks: 
       - wppc-network
     depends_on:
