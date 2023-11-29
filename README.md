@@ -6,9 +6,6 @@ Build revisada e configurada do WPPConnect para uso da Tecnocomp Tecnologia e Se
 
 ### Serviços
 
-- WPPC-FRONT
-  - Interface WEB da aplicação
-
 - WPPC-SERVER
   - Serviço principal da aplicação
 
