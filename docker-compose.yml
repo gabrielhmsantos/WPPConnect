@@ -40,7 +40,7 @@ services:
     entrypoint: nginx -g "daemon off;"
     ports:
       - "2080:8080"
-      - "2081:8081"
+      - "8081:8081"
     networks:
       - WPPC-NETWORK
     depends_on:
