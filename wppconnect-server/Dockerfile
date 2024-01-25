@@ -1,4 +1,4 @@
-FROM node:18-bookworm as builder
+FROM node:18-alpine as builder
 
 
 
@@ -14,7 +14,7 @@ COPY ./config.ts /home/node/app/src
 
 RUN yarn install
 
-FROM node:18-bookworm
+FROM node:18-alpine
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 WORKDIR /home/node/app
 RUN apk add chromium
