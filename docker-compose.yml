@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  WPPC-SERVER:
+  wppc-server:
     build:
       context: ./wppconnect-server
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
       - ./sessions:/home/node/app/tokens/        
     tty: true
 
-  WPPC-FRONT:
+  wppc-front:
     build:
       context: ./wppconnect-front
       dockerfile: Dockerfile
@@ -31,7 +31,7 @@ services:
     depends_on:
       - WPPC-SERVER
 
-  WPPC-PROXY:
+  wppc-proxy:
     build:
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
