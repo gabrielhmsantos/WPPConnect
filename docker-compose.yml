@@ -29,7 +29,7 @@ services:
       - WPPC-NETWORK
     tty: true
     depends_on:
-      - WPPC-SERVER
+      - wppc-server
 
   wppc-proxy:
     build:
@@ -44,7 +44,7 @@ services:
     networks:
       - WPPC-NETWORK
     depends_on:
-      - WPPC-FRONT
+      - wppc-front
 
 networks:
   WPPC-NETWORK:
