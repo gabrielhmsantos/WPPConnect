@@ -1,9 +1,9 @@
 version: '3'
 
-services: 
+services:
 
-  wppc-server:
-    build: 
+  WPPC-SERVER:
+    build:
       context: ./wppconnect-server
       dockerfile: Dockerfile
     restart: always
@@ -11,42 +11,42 @@ services:
     container_name: WPPC-SERVER
     hostname: WPPC-SERVER
     entrypoint: docker-entrypoint.sh yarn dev
-    networks: 
-      - wppc-network
+    networks:
+      - WPPC-NETWORK
     volumes:
-      - ./sessions:/home/node/app/tokens/    
+      - ./sessions:/home/node/app/tokens/        
     tty: true
-  
-  wppc-front:
-    build: 
+
+  WPPC-FRONT:
+    build:
       context: ./wppconnect-front
       dockerfile: Dockerfile
     image: wppconnect-front
     container_name: WPPC-FRONT
     hostname: WPPC-FRONT
-    entrypoint: docker-entrypoint.sh yarn start
-    networks: 
-      - wppc-network
+    entrypoint: docker-entrypoint.sh npm run serve -- --port 3000
+    networks:
+      - WPPC-NETWORK
     tty: true
     depends_on:
-      - wppc-server
+      - WPPC-SERVER
 
-  wppc-nginx:
-    build: 
+  WPPC-PROXY:
+    build:
       context: ./wppconnect-nginx
       dockerfile: Dockerfile
-    container_name: WPPC-NGINX
-    hostname: WPPC-NGINX
+    container_name: WPPC-PROXY
+    hostname: WPPC-PROXY
     entrypoint: nginx -g "daemon off;"
     ports:
-      - "9080:8080"
-      - "9081:8081"
-    networks: 
-      - wppc-network
+      - "2080:8080"
+      - "2081:8081"
+    networks:
+      - WPPC-NETWORK
     depends_on:
-      - wppc-front
+      - WPPC-FRONT
 
-networks: 
-  wppc-network:
-    name: wppc-network
-    driver: bridge 
+networks:
+  WPPC-NETWORK:
+    name: WPPC-NETWORK
+    driver: bridge

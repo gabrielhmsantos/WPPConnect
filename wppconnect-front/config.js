@@ -1,2 +1,6 @@
-window.IP_SERVER = 'http://localhost:8081/api/';
-window.IP_SOCKET_IO = 'http://localhost:8081';
+const config = {
+    IP_SERVER: "http://localhost:8081/api/",
+    IP_SOCKET_IO: "http://localhost:8081",
+    TOKEN_KEY: "@WPPConnect-Token",
+    LANGUAGE: "pt-BR",
+};

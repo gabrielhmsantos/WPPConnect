@@ -1,8 +1,8 @@
 export default {
-  secretKey: 'T3cN0C0mPP',
+  secretKey: 'changeme',
   host: 'http://localhost',
   port: '21465',
-  deviceName: 'WppConnect',
+  deviceName: 'SysAPI',
   poweredBy: 'WPPConnect-Server',
   startAllSession: true,
   tokenStoreType: 'file',
@@ -33,7 +33,7 @@ export default {
     daysToArchive: 45,
   },
   log: {
-    level: 'silly', // Before open a issue, change level to silly and retry a action
+    level: 'silly',
     logger: ['console', 'file'],
   },
   createOptions: {
